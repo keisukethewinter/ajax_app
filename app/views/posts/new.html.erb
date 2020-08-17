@@ -1,0 +1,6 @@
+<h1>新規投稿ページ</h1>
+
+<%= form_with url: '/posts', method: :post, local: true do |f| %>
+<%= f.text_field :memo %>
+<%= f.submit '投稿する' %>
+<% end %>

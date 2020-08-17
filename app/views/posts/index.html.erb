@@ -1,0 +1,12 @@
+<h1>トップページ</h1>
+
+<h4>hello world</h4>
+
+<%= link_to '投稿ページ', 'posts/new' %>
+
+<% @posts.each do |p| %>
+<div>
+<%= p.memo %> 
+<%= p.updated_at %>
+</div>
+<% end%>
