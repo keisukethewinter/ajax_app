@@ -4,9 +4,9 @@ class PostsController < ApplicationController
   end
 
   def create
-    Post.create(content: params[:content])
-    redirect_to ation: :index#メモを保存した後にトップページへリダイレクトされるように追記
-    
+    post = Post.create(content: params[:content],checked: false)
+    render json: {post: post}
+    #既読や未読の情報を追加したため「メモ作成時に「未読」という情報を保存するようにしたこと」と、Ajaxを実現するため「レスポンスをJSONに変更したこと」
   end
 
   def checked #checkedアクションは、「既読」の操作を行ったときに実行されるアクションです。

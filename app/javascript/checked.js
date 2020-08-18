@@ -7,11 +7,11 @@ function check(){//checkという名前で関数を定義。DOMの取得から�
       return null;
     }//1度でも読み込んでいればpost.setAttribute("data-load", "true");を実行しdata-loadという要素を追加しています。
     post.setAttribute("data-load","true");//2回目以降はdata-loadがnullではないもの、すなわち読み込まれたことのある投稿の場合には、処理を中断させる記述をします。
-    post.addEventListener("click", (e) =>{//引数にclickの指定をする事でクリックした時の動作を設定
+    post.addEventListener("click", (e) =>{//引数にclickの指定をする事でクリックした時の動作を設定 => はfunctionの代わり ////これで、「要素を1つずつに対して、『クリック』」した際に動作するイベント駆動」を設定することができました。
       const postId = post.getAttribute("data-id");//どの投稿をクリックしたのか、カスタムデータを利用して取得している//post要素のdata-id属性の値を取得。このidは後ほど、URLパラメーターでサーバーにパラメーターとして送ります
       const XHR = new XMLHttpRequest();//エンドポイントを呼び出すために、XMLHttpRequestを使用してHTTPリクエストを行います。まず、オブジェクトを生成する必要がありますのでこのように記述しましょう。これで変数XHRから、XMLHttpRequestのメソッドを使用できるようになります。
       //XMLHttpRequestとは、Ajaxを可能にするためのオブジェクトで、サーバーにHTTPリクエストを非同期で行うことができます。XMLHttpRequestにはさまざまなメソッドが用意されており、それらを使用してサーバーへリクエストを送ります。
-      XHR.open("GET",`/posts/${postId}`,true);//openは、XMLHttpRequestで定義されているメソッド。第一引数にはHTTPメソッド、第二引数にはパス、第三引数には非同期通信であるかをbooleanで記述します。
+      XHR.open("GET",`/posts/${postId}`,true);//openは、XMLHttpRequestで定義されている初期化を行うメソッド。第一引数にはHTTPメソッド、第二引数にはパス、第三引数には非同期通信であるかをbooleanで記述します。
       XHR.responseType = "json";//responseTypeとは、XMLHttpRequestで定義されているメソッドで、レスポンスの形式を指定するメソッドですHTMLではなくJSON形式でクライアントにレスポンスするための記述。
       XHR.send();//sendとは、XMLHttpRequestで定義されているメソッドで、sendメソッドを記述する事で初めてリクエストを送信することができます。openメソッドで非同期通信をtrueにしている場合は、すぐにレスポンスが返却されます。引数の指定はとくに必要ありません
       XHR.onload = () => { //レスポンスなどの受信が成功した場合に呼び出されるイベントハンドラーのことです。
@@ -32,7 +32,7 @@ function check(){//checkという名前で関数を定義。DOMの取得から�
     };
     e.preventDefault();//// イベントをキャンセルして、処理が重複しないようにしている
   });
-  });//これで、「要素を1つずつに対して、『クリック』」した際に動作するイベント駆動」を設定することができました。
+  });
 };
 
 setInterval(check, 1000);
